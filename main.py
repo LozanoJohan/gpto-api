@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from frontend.db import execute_query, conn
 from frontend.firebase import upload_chat_message
-from frontend.gpt import answer_with_data
+from frontend.gpt import think_steps
 from frontend.sql_coder import generate_query
 import config
 
@@ -9,8 +9,10 @@ app = FastAPI()
 
 @app.get("/get_answer/")
 async def get_answer(prompt: str):
+    steps = think_steps(prompt)
+    print("Steps:", steps)
     try:
-        data, query = query_database(prompt)  
+        data, query = query_database(steps)  
         try:
             upload_chat_message(prompt, data)
         except Exception as e:
