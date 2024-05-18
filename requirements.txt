@@ -1,4 +1,5 @@
-"fastapi[all]"
+fastapi
+uvicorn
 firebase_admin
 pymssql
 openai
