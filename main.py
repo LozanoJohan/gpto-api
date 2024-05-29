@@ -13,7 +13,7 @@ app = FastAPI()
 
 @app.get("/get_answer/")
 async def get_answer(prompt: str):
-    if os.getenv("THINK_PROMPT"):
+    if os.getenv("THINK_PROMPT") == 1:
         print("Think prompt:", os.getenv("THINK_PROMPT"))
         prompt = think_steps(prompt)
     print("Steps:", prompt)
