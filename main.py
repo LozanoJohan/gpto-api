@@ -4,15 +4,21 @@ from frontend.firebase import upload_chat_message
 from frontend.gpt import think_steps
 from frontend.sql_coder import generate_query
 import config
+import dotenv
+import os
+
+dotenv.load_dotenv()
 
 app = FastAPI()
 
 @app.get("/get_answer/")
 async def get_answer(prompt: str):
-    steps = think_steps(prompt)
-    print("Steps:", steps)
+    if os.getenv("THINK_PROMPT"):
+        print("Think prompt:", os.getenv("THINK_PROMPT"))
+        prompt = think_steps(prompt)
+    print("Steps:", prompt)
     try:
-        data, query = query_database(steps)  
+        data, query = query_database(prompt)  
         try:
             upload_chat_message(prompt, data)
         except Exception as e:

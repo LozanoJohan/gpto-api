@@ -42,6 +42,14 @@ CREATE TABLE ALMACEN (
    NOMBREALMACEN NVARCHAR -- Name of the Wharehouse
 ); -- Contains the data of the stores operated by the company, their location, telephone number, among others.
 
+CREATE TABLE COSTESPORALMACEN ( 
+CRECODALMACEN NVARCHAR, -- Unique identification code for each Warehaouse
+CODARTICULO INT, -- Unique ID of each product
+COSTESTOCK FLOAT --IS THE WEIGHTED AVERAGE COST OF THE PRODUCT
+); -- Contains the cost of the products specified by each sales warehouse, i.e. the product may have different costs depending on the sales warehouse.
+
+-- COSTERPORALMACEN.CODARTICULO can be joined with ARTICULOS.CODARTIOCULO
+-- COSTESPORALMACEN.CODALMACEN can be joined with ALMACEN.CODALMACEN
 -- FACTURASVENTA.NUMSERIE can be joined with ALBVENTACAB.NUMSERIEFAC
 -- FACTURASVENTA.NUMFACTURA can be joined with ALBVENTACAB.NUMFAC
 -- CLIENTES.CODCLIENTE can be joined with FACTURASVENTA.CODCLIENTE
